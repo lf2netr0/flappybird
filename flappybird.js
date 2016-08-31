@@ -3,19 +3,20 @@ var game = new Phaser.Game(300 ,500 , Phaser.AUTO, 'phaser', {preload: preload, 
 function preload() {
 
     game.load.spritesheet('bird', 'flappy/bird.png', 34, 24);
-    game.load.spritesheet('pipesUp', 'flappy/pipes.png', 54, 320);
-    game.load.spritesheet('pipesDown', 'flappy/pipes.png', 54, 320, 2);
+    game.load.spritesheet('pipes', 'flappy/pipes.png', 54, 320);
+    game.load.spritesheet('medals', 'flappy/medals.png', 44, 46);
     game.load.image('background', 'flappy/background.png');
     game.load.image('ground', 'flappy/ground.png');
     game.load.image('logo', 'flappy/title.png');
     game.load.image('start', 'flappy/start-button.png');
     game.load.image('over', 'flappy/gameover.png');
     game.load.image('scoreboard', 'flappy/scoreboard.png');
+
 };
 
 var pipesUp = new Array();
 var pipesDown = new Array();
-var score = 0;
+var score = 20;
 
 function create(){
 	background = game.add.tileSprite(0, 0, 300, 500, 'background');
@@ -70,8 +71,8 @@ function generatePipes(){
 	for(var i = 0;i < 2;i++){
 
 		var position = 180 * Math.random();
-		var pipesup = game.add.sprite(300 + i*200, -270 + position, 'pipesUp');
-		var pipesdown = game.add.sprite(300 + i*200, 190 + position, 'pipesDown', 1);
+		var pipesup = game.add.sprite(300 + i*200, -270 + position, 'pipes');
+		var pipesdown = game.add.sprite(300 + i*200, 190 + position, 'pipes', 1);
 		game.physics.enable(pipesup, Phaser.Physics.ARCADE);
 		game.physics.enable(pipesdown, Phaser.Physics.ARCADE);
 		pipesup.body.velocity.x = -100;
@@ -93,6 +94,12 @@ function dead(){
 	scoreboard = game.add.sprite(35, 150, 'scoreboard');
 	var style = { font: 'bold 50pt Arial', fill: 'white', align: 'left'};
     var text = game.add.text(175, 190, score, style);
+    if (score >= 10 && score < 20){
+    	medals = game.add.sprite(63, 193, 'medals');
+    }
+    else if(score >=20){
+    	medals = game.add.sprite(63, 193, 'medals', 1);
+    }
 
 }
 
