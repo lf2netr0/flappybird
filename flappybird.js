@@ -29,9 +29,17 @@ function create(){
 
 	generatePipes();
 
+	cursors = game.input.keyboard.createCursorKeys();
+	jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+
 };
 
 function update(){
+
+	if (jumpButton.isDown || game.input.activePointer.leftButton.isDown)
+    {
+        fish.body.velocity.y = -350;
+    }
 
 	for(var i = 0;i < 2;i++){
 		if(pipesUp[i].body.x < -100){
