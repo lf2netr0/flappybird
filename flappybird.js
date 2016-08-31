@@ -41,18 +41,20 @@ function update(){
 	game.physics.arcade.overlap(bird,  pipesDown, dead, null, this);
 	game.physics.arcade.overlap(bird,  ground, dead, null, this);
 
-	if (jumpButton.isDown || game.input.activePointer.leftButton.isDown)
-    {
-        bird.body.velocity.y = -350;
-    }
+	if(bird.alive){
+		if (jumpButton.isDown || game.input.activePointer.leftButton.isDown)
+	    {
+	        bird.body.velocity.y = -350;
+	    }
 
-	for(var i = 0;i < 2;i++){
-		if(pipesUp[i].body.x < -100){
-			var position = 180 * Math.random();
-			pipesUp[i].body.x = 300;
-			pipesUp[i].body.y = -270 + position;
-			pipesDown[i].body.x = 300;
-			pipesDown[i].body.y = 190 + position;
+		for(var i = 0;i < 2;i++){
+			if(pipesUp[i].body.x < -100){
+				var position = 180 * Math.random();
+				pipesUp[i].body.x = 300;
+				pipesUp[i].body.y = -270 + position;
+				pipesDown[i].body.x = 300;
+				pipesDown[i].body.y = 190 + position;
+			}
 		}
 	}
 
