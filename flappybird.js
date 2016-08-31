@@ -18,6 +18,12 @@ function create(){
 	background.fixedToCamera = true;
 
 	ground = game.add.tileSprite(0, 400, 335, 112, 'ground');
+	ground.autoScroll(-200, 0);
+
+	fish = game.add.sprite(125, 250, 'fish');
+	game.physics.enable(fish, Phaser.Physics.ARCADE);
+	fish.body.gravity.y = 1200;
+
 };
 
 function update(){
