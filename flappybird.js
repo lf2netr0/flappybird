@@ -13,6 +13,8 @@ function preload() {
     game.load.image('scoreboard', 'flappy/scoreboard.png');
 };
 
+
+
 function create(){
 	background = game.add.tileSprite(0, 0, 300, 500, 'background');
 	background.fixedToCamera = true;
@@ -24,8 +26,20 @@ function create(){
 	game.physics.enable(fish, Phaser.Physics.ARCADE);
 	fish.body.gravity.y = 1200;
 
+	generatePipes();
+
 };
 
 function update(){
 
 };
+
+function generatePipes(){
+	var pipesup = game.add.sprite(200, -180,'pipesUp');
+	var pipesdown = game.add.sprite(200, 280,'pipesDown',1);
+	game.physics.enable(pipesup, Phaser.Physics.ARCADE);
+	game.physics.enable(pipesdown, Phaser.Physics.ARCADE);
+	pipesup.body.velocity.x = -100;
+	pipesdown.body.velocity.x = -100;
+
+}
