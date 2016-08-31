@@ -2,7 +2,7 @@ var game = new Phaser.Game(300 ,500 , Phaser.AUTO, 'phaser', {preload: preload, 
 
 function preload() {
 
-    game.load.spritesheet('fish', 'flappy/bird.png', 34, 24);
+    game.load.spritesheet('bird', 'flappy/bird.png', 34, 24);
     game.load.spritesheet('pipesUp', 'flappy/pipes.png', 54, 320);
     game.load.spritesheet('pipesDown', 'flappy/pipes.png', 54, 320, 2);
     game.load.image('background', 'flappy/background.png');
@@ -22,10 +22,11 @@ function create(){
 
 	ground = game.add.tileSprite(0, 400, 335, 112, 'ground');
 	ground.autoScroll(-200, 0);
+	game.physics.enable(ground, Phaser.Physics.ARCADE);
 
-	fish = game.add.sprite(125, 250, 'fish');
-	game.physics.enable(fish, Phaser.Physics.ARCADE);
-	fish.body.gravity.y = 1200;
+	bird = game.add.sprite(125, 250, 'bird');
+	game.physics.enable(bird, Phaser.Physics.ARCADE);
+	bird.body.gravity.y = 1200;
 
 	generatePipes();
 
@@ -36,9 +37,13 @@ function create(){
 
 function update(){
 
+	game.physics.arcade.overlap(bird,  pipesUp, dead, null, this);
+	game.physics.arcade.overlap(bird,  pipesDown, dead, null, this);
+	game.physics.arcade.overlap(bird,  ground, dead, null, this);
+
 	if (jumpButton.isDown || game.input.activePointer.leftButton.isDown)
     {
-        fish.body.velocity.y = -350;
+        bird.body.velocity.y = -350;
     }
 
 	for(var i = 0;i < 2;i++){
@@ -70,5 +75,13 @@ function generatePipes(){
 
 	}
 	
+
+}
+
+function dead(){
+
+	bird.destroy();
+	over = game.add.sprite(55, 100, 'over');
+	over.bringToTop();
 
 }
