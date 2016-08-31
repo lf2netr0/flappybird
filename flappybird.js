@@ -33,13 +33,25 @@ function create(){
 
 function update(){
 
+	for(var i = 0;i < 2;i++){
+		if(pipesUp[i].body.x < -100){
+			var position = 180 * Math.random();
+			pipesUp[i].body.x = 300;
+			pipesUp[i].body.y = -270 + position;
+			pipesDown[i].body.x = 300;
+			pipesDown[i].body.y = 190 + position;
+		}
+	}
+
 };
 
 function generatePipes(){
+
 	for(var i = 0;i < 2;i++){
 
-		var pipesup = game.add.sprite(200+i*200, -180,'pipesUp');
-		var pipesdown = game.add.sprite(200+i*200, 280,'pipesDown',1);
+		var position = 180 * Math.random();
+		var pipesup = game.add.sprite(300 + i*200, -270 + position, 'pipesUp');
+		var pipesdown = game.add.sprite(300 + i*200, 190 + position, 'pipesDown', 1);
 		game.physics.enable(pipesup, Phaser.Physics.ARCADE);
 		game.physics.enable(pipesdown, Phaser.Physics.ARCADE);
 		pipesup.body.velocity.x = -100;
