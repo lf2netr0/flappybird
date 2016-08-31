@@ -18,7 +18,6 @@ var pipesDown = new Array();
 
 function create(){
 	background = game.add.tileSprite(0, 0, 300, 500, 'background');
-	background.fixedToCamera = true;
 
 	ground = game.add.tileSprite(0, 400, 335, 112, 'ground');
 	ground.autoScroll(-200, 0);
@@ -32,6 +31,10 @@ function create(){
 
 	cursors = game.input.keyboard.createCursorKeys();
 	jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+
+	logo = game.add.sprite(60, 100, 'logo');
+    button = game.add.button(100, 250, 'start',startGame);
+	gamePause();
 
 };
 
@@ -85,5 +88,19 @@ function dead(){
 	bird.destroy();
 	over = game.add.sprite(55, 100, 'over');
 	over.bringToTop();
+
+}
+
+function gamePause() {
+
+    game.physics.arcade.isPaused = (game.physics.arcade.isPaused) ? false : true;
+
+}
+
+function startGame(){
+
+	logo.kill();
+	button.kill();
+	gamePause();
 
 }
