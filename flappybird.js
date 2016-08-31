@@ -14,7 +14,10 @@ function preload() {
 };
 
 function create(){
+	background = game.add.tileSprite(0, 0, 300, 500, 'background');
+	background.fixedToCamera = true;
 
+	ground = game.add.tileSprite(0, 400, 335, 112, 'ground');
 };
 
 function update(){
