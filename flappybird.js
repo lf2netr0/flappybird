@@ -13,7 +13,8 @@ function preload() {
     game.load.image('scoreboard', 'flappy/scoreboard.png');
 };
 
-
+var pipesUp = new Array();
+var pipesDown = new Array();
 
 function create(){
 	background = game.add.tileSprite(0, 0, 300, 500, 'background');
@@ -35,11 +36,19 @@ function update(){
 };
 
 function generatePipes(){
-	var pipesup = game.add.sprite(200, -180,'pipesUp');
-	var pipesdown = game.add.sprite(200, 280,'pipesDown',1);
-	game.physics.enable(pipesup, Phaser.Physics.ARCADE);
-	game.physics.enable(pipesdown, Phaser.Physics.ARCADE);
-	pipesup.body.velocity.x = -100;
-	pipesdown.body.velocity.x = -100;
+	for(var i = 0;i < 2;i++){
+
+		var pipesup = game.add.sprite(200+i*200, -180,'pipesUp');
+		var pipesdown = game.add.sprite(200+i*200, 280,'pipesDown',1);
+		game.physics.enable(pipesup, Phaser.Physics.ARCADE);
+		game.physics.enable(pipesdown, Phaser.Physics.ARCADE);
+		pipesup.body.velocity.x = -100;
+		pipesdown.body.velocity.x = -100;
+
+		pipesUp.push(pipesup);
+		pipesDown.push(pipesdown);
+
+	}
+	
 
 }
