@@ -15,6 +15,7 @@ function preload() {
 
 var pipesUp = new Array();
 var pipesDown = new Array();
+var score = 0;
 
 function create(){
 	background = game.add.tileSprite(0, 0, 300, 500, 'background');
@@ -33,7 +34,7 @@ function create(){
 	jumpButton = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
 	logo = game.add.sprite(60, 100, 'logo');
-    button = game.add.button(100, 250, 'start',startGame);
+    button = game.add.button(100, 250, 'start', startGame);
 	gamePause();
 
 };
@@ -57,6 +58,7 @@ function update(){
 				pipesUp[i].body.y = -270 + position;
 				pipesDown[i].body.x = 300;
 				pipesDown[i].body.y = 190 + position;
+				score += 1;
 			}
 		}
 	}
@@ -88,6 +90,9 @@ function dead(){
 	bird.destroy();
 	over = game.add.sprite(55, 100, 'over');
 	over.bringToTop();
+	scoreboard = game.add.sprite(35, 150, 'scoreboard');
+	var style = { font: 'bold 50pt Arial', fill: 'white', align: 'left'};
+    var text = game.add.text(175, 190, score, style);
 
 }
 
