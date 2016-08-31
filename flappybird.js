@@ -16,7 +16,7 @@ function preload() {
 
 var pipesUp = new Array();
 var pipesDown = new Array();
-var score = 20;
+var score = 0;
 
 function create(){
 	background = game.add.tileSprite(0, 0, 300, 500, 'background');
